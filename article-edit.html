@@ -1,0 +1,14 @@
+<div ng-show="article.editing">
+  <form ng-submit="submitArticleChanges(article)" novalidate>
+    <div class="form-group">
+      <blockquote style="border-bottom: 1px solid #ccc;">
+        <input class="form-control" name="" type="text" value="{{article.title}}" ng-model="editArticle.title" />
+        <br/>
+        <textarea class="form-control" id="" name="" rows="4" ng-model="editArticle.content">{{article.content}}</textarea>
+        <br/>
+        <button type="submit" class="btn btn-primary pull-right">Submit</button>
+        <br/><br/>
+      </blockquote>
+    </div>
+  </form>
+</div>

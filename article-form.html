@@ -1,0 +1,18 @@
+<div class="container col-md-4" style="border-left: 1px solid #ccc;">
+  <form name="articleForm" ng-submit="addArticle()" novalidate>
+    <div class="form-group">
+      <label for="articletitle">
+        Title:
+      </label>
+      <input id="articletitle" name="title" type="text" value="" class="form-control" ng-model="article.title" required />
+      <br/>
+      <label for="articlecontent">
+        Content:
+      </label>
+      <textarea class="form-control" cols="3" rows="7" name="content" ng-model="article.content" required></textarea>
+      <input name="editing" type="hidden" value="false" ng-model="article.editing" />
+      <br/>
+      <button type="submit" class="btn btn-primary pull-right">Submit</button>
+    </div>
+  </form>
+</div>
