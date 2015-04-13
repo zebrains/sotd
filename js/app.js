@@ -18,11 +18,11 @@ lizopedia.directive("jumboTron", function(){
   };
 });
 
-lizopedia.directive("articlesFrame", function(){
+lizopedia.directive("shirtsFrame", function(){
   return {
     restrict: "E",
     replace: true,
-    templateUrl: "articles-frame.html"
+    templateUrl: "shirts-frame.html"
   };
 });
 
