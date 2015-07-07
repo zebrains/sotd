@@ -1,4 +1,4 @@
-var lizopedia = angular.module("lizopedia", []);
+var lizopedia = angular.module("shirtoftheday", []);
 
 //Directives
 
@@ -26,104 +26,42 @@ lizopedia.directive("shirtsFrame", function(){
   };
 });
 
-lizopedia.directive("articleForm", function(){
+lizopedia.directive("shirtBody", function(){
   return {
     restrict: "E",
     replace: true,
-    templateUrl: "article-form.html"
+    templateUrl: "shirt-body.html"
   };
 });
 
-lizopedia.directive("articleBody", function(){
-  return {
-    restrict: "E",
-    replace: true,
-    templateUrl: "article-body.html"
-  };
-});
-
-lizopedia.directive("articleEdit", function(){
-  return {
-    restrict: "E",
-    replace: true,
-    templateUrl: "article-edit.html"
-  };
-});
 
 //Controller
-lizopedia.controller("ArticleController", function($scope, $http){
+lizopedia.controller("ShirtController", function($scope, $http){
 
-    $scope.isEditing = false;
+    $scope.shirt = {};
 
-    $scope.article = {};
+    //TODO: Remove if unneeded
+    //$scope.isEditing = false;
+    //$scope.editShirt = {};
 
-    $scope.editArticle = {};
-
-    $http.get("./php/getArticles.php")
+    $http.get("./php/getShirts.php")
       .success(function(response) {
-        $scope.articles = response;
-      }
-      .failure(function(response) {
-        $scope.articles = []
+        //$scope.shirts = response;
+        $scope.shirts = [
+          {
+            "title": "Non Existant",
+            "image": "images/missing.jpg"
+          }
+        ]
+      })
+      .error(function(response) {
+        $scope.shirts = [
+          {
+            "title": "Non Existant",
+            "image": "images/missing.jpg"
+          }
+        ]
       }
       );
-
-/*    $scope.articles = [
-      {
-        "title": "Bonacles",
-        "content": "muah!",
-        "editing": false
-      },
-	    {
-        "title": "Noises",
-        "content": "while in",
-        "editing": false
-      }
-    ];
-*/
-    $scope.addArticle = function(){
-      // Add new article via addArticle.php
-      $http({
-        url: "./php/addArticle.php",
-        method: "GET",
-        params: {
-          "title": this.article.title,
-          "content": this.article.content
-        }
-      });
-      $scope.articles.push(this.article);
-      this.article = {};
-    };
-
-    $scope.editArticle = function(article){
-      // Some aliasing for ease of reading.
-      var articles = $scope.articles;
-
-      //$scope.editArticle = article;
-      $scope.editArticle.title = articles[articles.indexOf(article)].title;
-      $scope.editArticle.content =  articles[articles.indexOf(article)].content;
-      articles[articles.indexOf(article)].editing = true;
-      $scope.isEditing = true;
-    };
-
-    $scope.submitArticleChanges = function(article){
-      // Some aliasing for ease of reading.
-      var articles = $scope.articles;
-
-      $http({
-        url: "./php/editArticle.php",
-        method: "GET",
-        params: {
-          "id": articles[articles.indexOf(article)].id,
-          "title": $scope.editArticle.title,
-          "content": $scope.editArticle.content
-        }
-      });
-
-      articles[articles.indexOf(article)].title = $scope.editArticle.title;
-      articles[articles.indexOf(article)].content = $scope.editArticle.content;
-      articles[articles.indexOf(article)].editing = false;
-      $scope.isEditing = false;
-    };
 
 });
