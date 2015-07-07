@@ -1,17 +1,13 @@
-<div class="container-fluid" ng-controller="ShirtController as shirtCtrl">
-  <div class="container col-md-8">
-
+<div class="shirtframe" ng-controller="ShirtController as shirtCtrl">
     <h2 ng-show="shirts === undefined || shirts.length == 0">No current articles. </h2>
 
     <!-- Repeated Articles -->
-    <div ng-repeat="shirt in shirts | orderBy: 'title'">
-      <!-- Article -->
-      <shirt-body></shirt-body>
-      <!-- Article Edit Form <article-edit></article-edit> -->
-      
+    <div class="flex-container">
+      <div class="shirt" ng-repeat="shirt in shirts | orderBy: 'title'">
+        <!-- Article -->
+        <shirt-body></shirt-body>
+        <!-- Article Edit Form <article-edit></article-edit> -->
 
+      </div>
     </div>
-
-  </div>
-
 </div>
