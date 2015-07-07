@@ -62,7 +62,11 @@ lizopedia.controller("ArticleController", function($scope, $http){
     $http.get("./php/getArticles.php")
       .success(function(response) {
         $scope.articles = response;
-      });
+      }
+      .failure(function(response) {
+        $scope.articles = []
+      }
+      );
 
 /*    $scope.articles = [
       {
