@@ -39,67 +39,12 @@ lizopedia.directive("shirtBody", function(){
 lizopedia.controller("ShirtController", function($scope, $http){
 
     $scope.shirt = {};
+    $scope.shirts = [];
 
-    $scope.shirts = [
-      {
-        "title": "1",
-        "content": "blah!"
-      },
-      {
-        "title": "1",
-        "content": "blah!"
-      },
-      {
-        "title": "1",
-        "content": "blah!"
-      },
-      {
-        "title": "1",
-        "content": "blah!"
-      },
-      {
-        "title": "1",
-        "content": "blah!"
-      },
-      {
-        "title": "1",
-        "content": "blah!"
-      },
-      {
-        "title": "1",
-        "content": "blah!"
-      },
-      {
-        "title": "1",
-        "content": "blah!"
-      },
-      {
-        "title": "1",
-        "content": "blah!"
-      },
-      {
-        "title": "1",
-        "content": "blah!"
-      },
-      {
-        "title": "1",
-        "content": "blah!"
-      }
-    ]
-    //TODO: Remove if unneeded
-    //$scope.isEditing = false;
-    //$scope.editShirt = {};
-
-    /*
-    $http.get("./php/getShirts.php")
+    $http.get("./php/teefury.php")
       .success(function(response) {
-        //$scope.shirts = response;
-        $scope.shirts = [
-          {
-            "title": "Non Existant",
-            "image": "images/missing.jpg"
-          }
-        ]
+        $scope.shirts = response;
+        //console.log(response);
       })
       .error(function(response) {
         $scope.shirts = [
@@ -110,6 +55,6 @@ lizopedia.controller("ShirtController", function($scope, $http){
         ]
       }
       );
-      */
+
 
 });
