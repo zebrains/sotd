@@ -41,7 +41,7 @@ lizopedia.controller("ShirtController", function($scope, $http){
     $scope.shirt = {};
     $scope.shirts = [];
 
-    $http.get("./php/teefury.php")
+    $http.get("./php/yetee.php")
       .success(function(response) {
         $scope.shirts = response;
         //console.log(response);

@@ -10,15 +10,17 @@ $data = '';
 $count = 0;
 foreach ($parser -> channel -> item as $item) {
   if (strpos((string)$item -> link, "shirt.woot") !== false) {
-    $data['title'] = (string)$item -> title;
-    $data['content'] = (string)$item -> standardimage;
-    $data['cost'] = (string)$item -> price;
-    $data['shipping'] = "$5";
-    $data['link'] = (string)$item -> link;
+    $woot = $item -> children('http://www.woot.com/');
+    $data[0]['title'] = (string)$item -> title;
+    $data[0]['content'] = (string)$woot -> standardimage;
+    $data[0]['site'] = "Woot!";
+    $data[0]['cost'] = (string)$woot -> price;
+    $data[0]['shipping'] = "$5";
+    $data[0]['link'] = (string)$item -> link;
   }
 }
 
-//print $data;
+//print_r($parser);
 
 print json_encode($data);
 
