@@ -1,16 +1,19 @@
 <?php
 // TODO: INCOMPLETE
-$url = "http://www.teefury.com/rss/rss.xml";
+$url = "https://www.riptapparel.com/rss/";
 $affiliate = "";
 
 $feed = file_get_contents($url);
 $parser= new SimpleXMLElement($feed);
 
-$data = array('');
-$count = 0;
-foreach ($parser -> entry as $entry) {
+$count = count($data);
+foreach ($parser -> channel -> item as $entry) {
   $data[$count]['title'] = $entry -> title;
   $data[$count]['content'] = strchr(strchr($entry -> content, "http"),'"', true);
+  $data[$count]['site'] = "Ript";
+  $data[$count]['cost'] = "$11";
+  $data[$count]['shipping'] = "$3";
+  $data[$count]['link'] = $entry -> link;
   $count++;
 }
 
