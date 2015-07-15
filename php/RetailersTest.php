@@ -90,12 +90,39 @@ class RiptTest extends PHPUnit_Framework_TestCase {
       $this->assertFalse('' == (string)$shirt['title'], "Title is missing from Ript");
       $this->assertFalse('' == (string)$shirt['content'], "Content is missing from Ript");
       $this->assertTrue('Ript' == (string)$shirt['site'], "Site is not Ript");
-      $this->assertTrue('$11' == (string)$shirt['cost'], "Cost is missing from Ript");
+      $this->assertFalse('' == (string)$shirt['cost'], "Cost is missing from Ript");
       $this->assertTrue('$3' == (string)$shirt['shipping'], "Shipping is empty for Ript");
       $this->assertFalse('' == (string)$shirt['link'], "Link is missing from Ript");
     }
   }
+}
 
+class OtherTeesTest extends PHPUnit_Framework_TestCase{
+
+  protected $data;
+
+  protected function setUp(){
+    $a = new Retailers();
+    $this->data = $a->get_othertees($this->data);
+  }
+
+  public function testOtherTeesArray(){
+    $this->assertGreaterThan(0, count($this->data), "OtherTees array is borked");
+  }
+
+  /**
+   * depends testRiptArray
+   */
+  public function testOtherTeesData(){
+    foreach ($this->data as $shirt) {
+      $this->assertFalse('' == (string)$shirt['title'], "Title is missing from OtherTees");
+      $this->assertFalse('' == (string)$shirt['content'], "Content is missing from OtherTees");
+      $this->assertTrue('OtherTees' == (string)$shirt['site'], "Site is not OtherTees");
+      $this->assertFalse('' == (string)$shirt['cost'], "Cost is missing from OtherTees");
+      $this->assertFalse('' == (string)$shirt['shipping'], "Shipping is missing from OtherTees");
+      $this->assertFalse('' == (string)$shirt['link'], "Link is missing from OtherTees");
+    }
+  }
 
 }
 
