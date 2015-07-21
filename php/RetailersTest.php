@@ -97,6 +97,35 @@ class RiptTest extends PHPUnit_Framework_TestCase {
   }
 }
 
+class YeteeTest extends PHPUnit_Framework_TestCase{
+
+  protected $data;
+
+  protected function setUp(){
+    $a = new Retailers();
+    $this->data = $a->get_yetee($this->data);
+  }
+
+  public function testYeteeArray(){
+    $this->assertGreaterThan(0, count($this->data), "Yetee array is borked");
+  }
+
+  /**
+   * depends testYeteeArray
+   */
+  public function testYeteeData(){
+    foreach ($this->data as $shirt) {
+      $this->assertFalse('' == (string)$shirt['title'], "Title is missing from Yetee");
+      $this->assertFalse('' == (string)$shirt['content'], "Content is missing from Yetee");
+      $this->assertTrue('Yetee' == (string)$shirt['site'], "Site is not Yetee");
+      $this->assertTrue('$11' == (string)$shirt['cost'], "Cost is missing from Yetee");
+      $this->assertTrue('$4' == (string)$shirt['shipping'], "Shipping is missing from Yetee");
+      $this->assertFalse('' == (string)$shirt['link'], "Link is missing from Yetee");
+    }
+  }
+
+}
+
 class OtherTeesTest extends PHPUnit_Framework_TestCase{
 
   protected $data;
@@ -125,6 +154,7 @@ class OtherTeesTest extends PHPUnit_Framework_TestCase{
   }
 
 }
+
 
 
 ?>

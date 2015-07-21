@@ -1,16 +1,32 @@
 <?php
 require_once("Retailers.php");
+require_once("validateRetailers.php");
 
+$testStatus = validateRetailers();
 $retailers = new Retailers();
 
 $data = array();
-$data = $retailers->get_woot($data);
-//$data = $retailers->get_qwertee($data); //Not implemented yet
-$data = $retailers->get_teefury($data);
-$data = $retailers->get_yetee($data);
-$data = $retailers->get_othertees($data);
-$data = $retailers->get_ript($data);
+if ($testStatus['Woot'] === "Passed"){
+  $data = $retailers->get_woot($data);
+}
 
+if ($testStatus['TeeFury'] === "Passed"){
+  $data = $retailers->get_teefury($data);
+}
+
+if ($testStatus['Yetee'] === "Passed"){
+  $data = $retailers->get_yetee($data);
+}
+
+if ($testStatus['OtherTees'] === "Passed"){
+  $data = $retailers->get_othertees($data);
+}
+
+if ($testStatus['Ript'] === "Passed"){
+  $data = $retailers->get_ript($data);
+}
+
+//$data = $retailers->get_qwertee($data); //Not implemented yet
 
 //print_r($data);
 

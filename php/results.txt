@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="./" tests="11" assertions="72" failures="0" errors="2" time="7.270112">
+    <testsuite name="WootTest" file="/home/steven/sotd/php/RetailersTest.php" tests="3" assertions="9" failures="0" errors="0" time="1.508235">
+      <testcase name="testWootArray" class="WootTest" file="/home/steven/sotd/php/RetailersTest.php" line="14" assertions="1" time="0.604470"/>
+      <testcase name="testWootData" class="WootTest" file="/home/steven/sotd/php/RetailersTest.php" line="22" assertions="6" time="0.310711"/>
+      <testcase name="testWootLinks" class="WootTest" file="/home/steven/sotd/php/RetailersTest.php" line="34" assertions="2" time="0.593054"/>
+    </testsuite>
+    <testsuite name="TeeFuryTest" file="/home/steven/sotd/php/RetailersTest.php" tests="2" assertions="13" failures="0" errors="0" time="0.464084">
+      <testcase name="testTeeFuryArray" class="TeeFuryTest" file="/home/steven/sotd/php/RetailersTest.php" line="51" assertions="1" time="0.228240"/>
+      <testcase name="testTeeFuryData" class="TeeFuryTest" file="/home/steven/sotd/php/RetailersTest.php" line="59" assertions="12" time="0.235844"/>
+    </testsuite>
+    <testsuite name="RiptTest" file="/home/steven/sotd/php/RetailersTest.php" tests="2" assertions="37" failures="0" errors="0" time="1.657274">
+      <testcase name="testRiptArray" class="RiptTest" file="/home/steven/sotd/php/RetailersTest.php" line="80" assertions="1" time="0.824691"/>
+      <testcase name="testRiptData" class="RiptTest" file="/home/steven/sotd/php/RetailersTest.php" line="88" assertions="36" time="0.832583"/>
+    </testsuite>
+    <testsuite name="YeteeTest" file="/home/steven/sotd/php/RetailersTest.php" tests="2" assertions="0" failures="0" errors="2" time="1.662069">
+      <testcase name="testYeteeArray" class="YeteeTest" file="/home/steven/sotd/php/RetailersTest.php" line="109" assertions="0" time="0.829431">
+        <error type="Exception">YeteeTest::testYeteeArray
+Exception: String could not be parsed as XML
+
+/home/steven/sotd/php/Retailers.php:101
+/home/steven/sotd/php/RetailersTest.php:106
+</error>
+      </testcase>
+      <testcase name="testYeteeData" class="YeteeTest" file="/home/steven/sotd/php/RetailersTest.php" line="116" assertions="0" time="0.832638">
+        <error type="Exception">YeteeTest::testYeteeData
+Exception: String could not be parsed as XML
+
+/home/steven/sotd/php/Retailers.php:101
+/home/steven/sotd/php/RetailersTest.php:106
+</error>
+      </testcase>
+    </testsuite>
+    <testsuite name="OtherTeesTest" file="/home/steven/sotd/php/RetailersTest.php" tests="2" assertions="13" failures="0" errors="0" time="1.978450">
+      <testcase name="testOtherTeesArray" class="OtherTeesTest" file="/home/steven/sotd/php/RetailersTest.php" line="138" assertions="1" time="0.690751"/>
+      <testcase name="testOtherTeesData" class="OtherTeesTest" file="/home/steven/sotd/php/RetailersTest.php" line="145" assertions="12" time="1.287699"/>
+    </testsuite>
+  </testsuite>
+</testsuites>
