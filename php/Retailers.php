@@ -155,26 +155,71 @@ class retailers{
 
     $count = count($data);
     $index = 0;
-    foreach ($parser -> channel -> item as $item) {
+    foreach ($parser->channel->item as $item) {
       if($index <= 1){
         $data[$count]['cost'] = "$12";
       }
       elseif ($index <= 3) {
         $data[$count]['cost'] = "$14";
       }
-      $data[$count]['title'] = (string)$item -> title;
+      $data[$count]['title'] = (string)$item->title;
       $data[$count]['content'] = (string)strchr(strchr(substr(strchr($item -> description, "http://"), 1), "http://"),'"', true);
       $data[$count]['site'] = "Qwertee";
       $data[$count]['shipping'] = "$3";
-      $data[$count]['link'] = (string)$item -> guid;
+      $data[$count]['link'] = (string)$item->guid;
       $count++;
     }
 
     return $data;
-
   }
 
 
+  public function get_bustedtees($data){
+    $url = "http://www.bustedtees.com/deals";
+    $affiliate = "";
+
+    $count = 0;
+    $feed = file_get_contents($url);
+    $dom = new DOMDocument();
+    @$dom->loadHTML($feed);
+
+    $xpath = new DOMXPath($dom);
+    $elements = $xpath->query("//div[@id='deals-container']");
+
+    foreach ($elements as $shirt) {
+      //print_r($shirt);
+      $data[$count]['title'] = $xpath->query("//span[@class='product_name']")->item($count)->nodeValue;
+      $data[$count]['content'] = $xpath->query("//div[@id='deals-container']/ul/li/a/img/@src")->item($count)->nodeValue;
+      $data[$count]['site'] = "BustedTees";
+      $data[$count]['shipping'] = "$7";
+      $data[$count]['cost'] = $xpath->query("//span[@class='sale_price']")->item($count)->nodeValue;
+      $data[$count]['link'] = "http://bustedtees.com" . $xpath->query("//div[@id='deals-container']/ul/li/a/@href")->item($count)->nodeValue;
+      $count++;
+    }
+    //print_r($data);
+    return $data;
+  }
+
+  public function get_ubertee($data){
+    $url = "https://www.ubertee.com/rss";
+    $affiliate = "";
+
+    $feed = file_get_contents($url);
+    $parser = new SimpleXMLElement($feed);
+
+    $count = count($data);
+    $index = 0;
+    foreach ($parser->channel->item as $shirt) {
+      $data[$count]['title'] = (string)$shirt->title;
+      $data[$count]['content'] = (string)strchr(strchr($shirt->description, "https://"),'"', true);
+      $data[$count]['site'] = "Ubertee";
+      $data[$count]['shipping'] = "?";
+      $data[$count]['cost'] = "$12";
+      $data[$count]['link'] = (string)$shirt->guid;
+    }
+
+    return $data;
+  }
 }
 
 ?>

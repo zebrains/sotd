@@ -6,16 +6,10 @@ $testStatus = validateRetailers();
 $retailers = new Retailers();
 
 $data = array();
-if ($testStatus['Woot'] === "Passed"){
-  $data = $retailers->get_woot($data);
-}
 
-if ($testStatus['TeeFury'] === "Passed"){
-  $data = $retailers->get_teefury($data);
-}
 
-if ($testStatus['Yetee'] === "Passed"){
-  $data = $retailers->get_yetee($data);
+if ($testStatus['BustedTees'] === "Passed"){
+  $data = $retailers->get_bustedtees($data);
 }
 
 if ($testStatus['OtherTees'] === "Passed"){
@@ -25,6 +19,26 @@ if ($testStatus['OtherTees'] === "Passed"){
 if ($testStatus['Ript'] === "Passed"){
   $data = $retailers->get_ript($data);
 }
+
+if ($testStatus['TeeFury'] === "Passed"){
+  $data = $retailers->get_teefury($data);
+}
+
+if ($testStatus['Ubertee'] === "Passed"){
+  $data = $retailers->get_ubertee($data);
+}
+
+if ($testStatus['Woot'] === "Passed"){
+  $data = $retailers->get_woot($data);
+}
+
+if ($testStatus['Yetee'] === "Passed"){
+  $data = $retailers->get_yetee($data);
+}
+
+
+
+
 
 //$data = $retailers->get_qwertee($data); //Not implemented yet
 
