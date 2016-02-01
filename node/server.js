@@ -6,7 +6,8 @@ var app     = express();
 
 
 
-//Complete
+//Incomplete
+/*
 app.get('/BustedTees', function(req, res){
 
       url = 'https://www.bustedtees.com/deals';
@@ -20,8 +21,8 @@ app.get('/BustedTees', function(req, res){
             xmlMode: true
           });
 
-          //#deal_4458 > a > img
-          $('div.row div#deals-container').each(function(i, element) {
+          //#bt-content > div > div > div
+          $('div#deals-container').each(function(i, element) {
             console.log("#"+i);
             shirt.title = $(this).find('ul#deals li.deal div.product-overlay div.overlay-content span.product_name').text();
 
@@ -35,7 +36,7 @@ app.get('/BustedTees', function(req, res){
         res.send(JSON.stringify(shirts, null, 2));
       })
 });
-
+*/
 //Complete
 app.get('/OtherTees', function(req, res){
 
@@ -279,10 +280,10 @@ app.get('/Woot', function(req, res){
   })
 });
 
-//Incomplete
+//Complete
 app.get('/Yetee', function(req, res){
 
-  url = 'https://theyetee.com/';
+  url = 'https://theyetee.com';
   var shirts = [];
   var shirt = {};
 
@@ -293,10 +294,13 @@ app.get('/Yetee', function(req, res){
         xmlMode: true
       });
 
-        //YETEE needs work
-        shirt.title = $('div.container div.featured-tee div.cycle-slideshow div.slide.cycle.cycle-sentinal a.js-trigger-modal').attr('alt');
-        shirt.content = $('div#content section div.photo-section a img.photo').attr('src');
-        shirt.link = url +  $('div#content section div.photo-section a').attr('href');
+        //body > div.frame > div.row.expand > div.hero-home > div.todays-tees.tees-2.artists-1 >
+        shirt.title = $('div.featured-artists-wrapper div div div.artist-info div.title').text().trim();
+
+        var content = $('div.cycle-slideshow div:nth-child(2) a div').attr('style');
+        content = content.substring(content.indexOf("/"));
+        shirt.content = url + content.substring(0, content.indexOf(")"));
+        shirt.link = url;
 
         shirts.push(shirt);
         shirt = {};
@@ -310,7 +314,7 @@ app.get('/Yetee', function(req, res){
 
 app.listen('8081');
 
-console.log('http://localhost:8081/BustedTees');
+//console.log('http://localhost:8081/BustedTees');
 console.log('http://localhost:8081/OtherTees');
 console.log('http://localhost:8081/Qwertee');
 console.log('http://localhost:8081/Ript');
@@ -318,5 +322,6 @@ console.log('http://localhost:8081/ShirtPunch');
 console.log('http://localhost:8081/Teefury');
 console.log('http://localhost:8081/Unamee');
 console.log('http://localhost:8081/Woot');
+console.log('http://localhost:8081/Yetee')
 
 exports = module.exports = app;

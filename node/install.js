@@ -31,8 +31,6 @@ retailers = [
 'CREATE (:retailer {name:"Yetee", url:"https://www.theyetee.com/"})'
 ]
 
-runCypherQuery
-
 for(var i=0; i<retailers.length; i++){
   runCypherQuery(
     retailers[i],
