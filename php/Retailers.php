@@ -7,6 +7,11 @@ class retailers{
     $affiliate = "";
 
     $feed = file_get_contents($url);
+
+    if ($feed === false){
+      return $data;
+    }
+
     $parser= new SimpleXMLElement($feed);
 
 
@@ -31,13 +36,18 @@ class retailers{
     return $data;
   }
 
-
+  // Affiliate: Rakuten linkshare
   public function get_teefury($data)
   {
     $url = "http://www.teefury.com/rss/rss.xml";
     $affiliate = "";
 
     $feed = file_get_contents($url);
+
+    if ($feed === false){
+      return $data;
+    }
+
     $parser= new SimpleXMLElement($feed);
 
     $count = count($data);
@@ -58,11 +68,17 @@ class retailers{
     return $data ;
   }
 
+  // Affiliate: Ript
   public function get_ript($data){
-    $url = "https://www.riptapparel.com/rss/";
-    $affiliate = "";
+    $url = "https://www.riptapparel.com/";
+    $affiliate = "GD6BMKZ4R42NQ9ZH";
 
-    $feed = file_get_contents($url);
+    $feed = @file_get_contents($url);
+
+    if ($feed === false){
+      return $data;
+    }
+
     $parser= new SimpleXMLElement($feed);
 
     $count = count($data);
@@ -84,7 +100,7 @@ class retailers{
       $data[$count]['content'] = (string)strchr(strchr($entry -> description, "http"),'"', true);
       $data[$count]['site'] = "Ript";
 
-      $data[$count]['link'] = (string)$entry -> link;
+      $data[$count]['link'] = (string)$entry -> link . "?aff=" . $affiliate;
       $count++;
       $index++;
     }
@@ -98,6 +114,11 @@ class retailers{
     $affiliate = "";
 
     $feed = file_get_contents($url);
+
+    if ($feed === false){
+      return $data;
+    }
+
     $parser= new SimpleXMLElement($feed);
 
 
@@ -117,12 +138,18 @@ class retailers{
 
   }
 
+  // Affiliate: Othertees
   public function get_othertees($data){
 
     $url = "http://www.othertees.com/feed/";
     $affiliate = "";
 
     $feed = file_get_contents($url);
+
+    if ($feed === false){
+      return $data;
+    }
+
     $parser= new SimpleXMLElement($feed);
 
     $count = count($data);
@@ -145,12 +172,51 @@ class retailers{
     return $data;
   }
 
+
+  // Affiliate: CJ
+  public function get_bustedtees($data){
+    $url = "http://www.bustedtees.com/deals";
+    $affiliate = "";
+
+    $count = 0;
+    $feed = file_get_contents($url);
+
+    if ($feed === false){
+      return $data;
+    }
+
+    $dom = new DOMDocument();
+    @$dom->loadHTML($feed);
+
+    $xpath = new DOMXPath($dom);
+    $elements = $xpath->query("//div[@id='deals-container']");
+
+    foreach ($elements as $shirt) {
+      //print_r($shirt);
+      $data[$count]['title'] = $xpath->query("//span[@class='product_name']")->item($count)->nodeValue;
+      $data[$count]['content'] = $xpath->query("//div[@id='deals-container']/ul/li/a/img/@src")->item($count)->nodeValue;
+      $data[$count]['site'] = "BustedTees";
+      $data[$count]['shipping'] = "$7";
+      $data[$count]['cost'] = $xpath->query("//span[@class='sale_price']")->item($count)->nodeValue;
+      $data[$count]['link'] = "http://bustedtees.com" . $xpath->query("//div[@id='deals-container']/ul/li/a/@href")->item($count)->nodeValue;
+      $count++;
+    }
+    //print_r($data);
+    return $data;
+  }
+
+  // Affiliate: Unknown
   public function get_qwertee($data){
     //TODO: figure out how to utilize qwertee
     $url = "http://www.qwertee.com/rss";
     $affiliate = "";
 
     $feed = file_get_contents($url);
+
+    if ($feed === false){
+      return $data;
+    }
+
     $parser = new SimpleXMLElement($feed);
 
     $count = count($data);
@@ -173,39 +239,18 @@ class retailers{
     return $data;
   }
 
-
-  public function get_bustedtees($data){
-    $url = "http://www.bustedtees.com/deals";
-    $affiliate = "";
-
-    $count = 0;
-    $feed = file_get_contents($url);
-    $dom = new DOMDocument();
-    @$dom->loadHTML($feed);
-
-    $xpath = new DOMXPath($dom);
-    $elements = $xpath->query("//div[@id='deals-container']");
-
-    foreach ($elements as $shirt) {
-      //print_r($shirt);
-      $data[$count]['title'] = $xpath->query("//span[@class='product_name']")->item($count)->nodeValue;
-      $data[$count]['content'] = $xpath->query("//div[@id='deals-container']/ul/li/a/img/@src")->item($count)->nodeValue;
-      $data[$count]['site'] = "BustedTees";
-      $data[$count]['shipping'] = "$7";
-      $data[$count]['cost'] = $xpath->query("//span[@class='sale_price']")->item($count)->nodeValue;
-      $data[$count]['link'] = "http://bustedtees.com" . $xpath->query("//div[@id='deals-container']/ul/li/a/@href")->item($count)->nodeValue;
-      $count++;
-    }
-    //print_r($data);
-    return $data;
-  }
-
+  // Affiliate: Unknown
   public function get_ubertee($data){
     $url = "https://www.ubertee.com/rss";
     $affiliate = "";
 
     $feed = file_get_contents($url);
-    $parser = new SimpleXMLElement($feed);
+
+    if ($feed === false){
+      return $data;
+    }
+
+    @$parser = new SimpleXMLElement($feed);
 
     $count = count($data);
     $index = 0;
@@ -217,6 +262,46 @@ class retailers{
       $data[$count]['cost'] = "$12";
       $data[$count]['link'] = (string)$shirt->guid;
     }
+
+    return $data;
+  }
+
+  // Affiliate Shareasale
+  //TODO: Incomplete retailer
+  public function get_unamee($data){
+    $url = "localhost:8081/unamee";
+    $affiliate = "http://www.shareasale.com/r.cfm?u=1144472&b=527906&m=50011&afftrack=&urllink=";
+
+    $shirts = json.parse(file_get_contents($url));
+
+    $count = count(data);
+    foreach ($shirts as $shirt){
+      $data[$count]['title'] = $shirt.title;
+      $data[$count]['content'] = $shirt.content;
+      $data[$count]['site'] = "Umamee";
+      $data[$count]['shipping'] = "?";
+      $data[$count]['cost'] = "$11";
+      $data[$count]['link'] = $shirt.link;
+    }
+  }
+
+
+  //Affiliate Shareasale
+  //TODO: incomplete retailer
+  public function get_onceaponatee($data){
+    $url = "";
+    $affiliate = "http://www.shareasale.com/r.cfm?u=1144472&b=507197&m=48996&afftrack=&urllink=";
+
+    $count = 0;
+    $feed = file_get_contents($url);
+
+
+    if ($feed === false){
+      return $data;
+    }
+
+    $dom = new DOMDocument();
+    @$dom->loadHTML($feed);
 
     return $data;
   }

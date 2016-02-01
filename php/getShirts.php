@@ -28,6 +28,9 @@ if ($testStatus['Ubertee'] === "Passed"){
   $data = $retailers->get_ubertee($data);
 }
 
+  $data = $retailers->get_umamee($data);
+
+
 if ($testStatus['Woot'] === "Passed"){
   $data = $retailers->get_woot($data);
 }

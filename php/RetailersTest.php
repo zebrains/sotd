@@ -121,7 +121,7 @@ class UberteeTest extends PHPUnit_Framework_TestCase{
 
   protected function setUp(){
     $a = new Retailers();
-    $this->data = $a->get_getubertee($this->data);
+    $this->data = $a->get_ubertee($this->data);
   }
 
   public function testUberteeArray(){

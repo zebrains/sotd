@@ -1,33 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testsuites>
-  <testsuite name="./" tests="15" assertions="200" failures="0" errors="2" time="15.011602">
-    <testsuite name="BustedTeesTest" file="/home/steven/sotd/php/RetailersTest.php" tests="2" assertions="121" failures="0" errors="0" time="3.004305">
-      <testcase name="testBustedTeesArray" class="BustedTeesTest" file="/home/steven/sotd/php/RetailersTest.php" line="13" assertions="1" time="1.476060"/>
-      <testcase name="testBustedTeesData" class="BustedTeesTest" file="/home/steven/sotd/php/RetailersTest.php" line="20" assertions="120" time="1.528245"/>
+  <testsuite name="./" tests="15" assertions="181" failures="0" errors="4" time="17.041526">
+    <testsuite name="BustedTeesTest" file="/home/steven/sotd/php/RetailersTest.php" tests="2" assertions="109" failures="0" errors="0" time="2.584448">
+      <testcase name="testBustedTeesArray" class="BustedTeesTest" file="/home/steven/sotd/php/RetailersTest.php" line="13" assertions="1" time="1.391807"/>
+      <testcase name="testBustedTeesData" class="BustedTeesTest" file="/home/steven/sotd/php/RetailersTest.php" line="20" assertions="108" time="1.192641"/>
     </testsuite>
-    <testsuite name="OtherTeesTest" file="/home/steven/sotd/php/RetailersTest.php" tests="2" assertions="13" failures="0" errors="0" time="3.211210">
-      <testcase name="testOtherTeesArray" class="OtherTeesTest" file="/home/steven/sotd/php/RetailersTest.php" line="41" assertions="1" time="0.872926"/>
-      <testcase name="testOtherTeesData" class="OtherTeesTest" file="/home/steven/sotd/php/RetailersTest.php" line="48" assertions="12" time="2.338284"/>
+    <testsuite name="OtherTeesTest" file="/home/steven/sotd/php/RetailersTest.php" tests="2" assertions="13" failures="0" errors="0" time="1.636959">
+      <testcase name="testOtherTeesArray" class="OtherTeesTest" file="/home/steven/sotd/php/RetailersTest.php" line="41" assertions="1" time="0.828764"/>
+      <testcase name="testOtherTeesData" class="OtherTeesTest" file="/home/steven/sotd/php/RetailersTest.php" line="48" assertions="12" time="0.808195"/>
     </testsuite>
-    <testsuite name="RiptTest" file="/home/steven/sotd/php/RetailersTest.php" tests="2" assertions="37" failures="0" errors="0" time="2.086001">
-      <testcase name="testRiptArray" class="RiptTest" file="/home/steven/sotd/php/RetailersTest.php" line="70" assertions="1" time="0.986387"/>
-      <testcase name="testRiptData" class="RiptTest" file="/home/steven/sotd/php/RetailersTest.php" line="78" assertions="36" time="1.099614"/>
+    <testsuite name="RiptTest" file="/home/steven/sotd/php/RetailersTest.php" tests="2" assertions="37" failures="0" errors="0" time="1.681694">
+      <testcase name="testRiptArray" class="RiptTest" file="/home/steven/sotd/php/RetailersTest.php" line="70" assertions="1" time="0.750546"/>
+      <testcase name="testRiptData" class="RiptTest" file="/home/steven/sotd/php/RetailersTest.php" line="78" assertions="36" time="0.931148"/>
     </testsuite>
-    <testsuite name="TeeFuryTest" file="/home/steven/sotd/php/RetailersTest.php" tests="2" assertions="13" failures="0" errors="0" time="0.778565">
-      <testcase name="testTeeFuryArray" class="TeeFuryTest" file="/home/steven/sotd/php/RetailersTest.php" line="99" assertions="1" time="0.369560"/>
-      <testcase name="testTeeFuryData" class="TeeFuryTest" file="/home/steven/sotd/php/RetailersTest.php" line="107" assertions="12" time="0.409005"/>
+    <testsuite name="TeeFuryTest" file="/home/steven/sotd/php/RetailersTest.php" tests="2" assertions="13" failures="0" errors="0" time="0.562924">
+      <testcase name="testTeeFuryArray" class="TeeFuryTest" file="/home/steven/sotd/php/RetailersTest.php" line="99" assertions="1" time="0.230662"/>
+      <testcase name="testTeeFuryData" class="TeeFuryTest" file="/home/steven/sotd/php/RetailersTest.php" line="107" assertions="12" time="0.332262"/>
     </testsuite>
-    <testsuite name="UberteeTest" file="/home/steven/sotd/php/RetailersTest.php" tests="2" assertions="7" failures="0" errors="0" time="2.573617">
-      <testcase name="testUberteeArray" class="UberteeTest" file="/home/steven/sotd/php/RetailersTest.php" line="127" assertions="1" time="1.246544"/>
-      <testcase name="testUberteeData" class="UberteeTest" file="/home/steven/sotd/php/RetailersTest.php" line="131" assertions="6" time="1.327073"/>
+    <testsuite name="UberteeTest" file="/home/steven/sotd/php/RetailersTest.php" tests="2" assertions="0" failures="0" errors="2" time="7.053087">
+      <testcase name="testUberteeArray" class="UberteeTest" file="/home/steven/sotd/php/RetailersTest.php" line="127" assertions="0" time="3.694912">
+        <error type="Exception">UberteeTest::testUberteeArray
+Exception: String could not be parsed as XML
+
+/home/steven/sotd/php/Retailers.php:208
+/home/steven/sotd/php/RetailersTest.php:124
+</error>
+      </testcase>
+      <testcase name="testUberteeData" class="UberteeTest" file="/home/steven/sotd/php/RetailersTest.php" line="131" assertions="0" time="3.358175">
+        <error type="Exception">UberteeTest::testUberteeData
+Exception: String could not be parsed as XML
+
+/home/steven/sotd/php/Retailers.php:208
+/home/steven/sotd/php/RetailersTest.php:124
+</error>
+      </testcase>
     </testsuite>
-    <testsuite name="WootTest" file="/home/steven/sotd/php/RetailersTest.php" tests="3" assertions="9" failures="0" errors="0" time="0.976694">
-      <testcase name="testWootArray" class="WootTest" file="/home/steven/sotd/php/RetailersTest.php" line="151" assertions="1" time="0.406074"/>
-      <testcase name="testWootData" class="WootTest" file="/home/steven/sotd/php/RetailersTest.php" line="159" assertions="6" time="0.239096"/>
-      <testcase name="testWootLinks" class="WootTest" file="/home/steven/sotd/php/RetailersTest.php" line="171" assertions="2" time="0.331524"/>
+    <testsuite name="WootTest" file="/home/steven/sotd/php/RetailersTest.php" tests="3" assertions="9" failures="0" errors="0" time="1.714414">
+      <testcase name="testWootArray" class="WootTest" file="/home/steven/sotd/php/RetailersTest.php" line="151" assertions="1" time="0.494517"/>
+      <testcase name="testWootData" class="WootTest" file="/home/steven/sotd/php/RetailersTest.php" line="159" assertions="6" time="0.280011"/>
+      <testcase name="testWootLinks" class="WootTest" file="/home/steven/sotd/php/RetailersTest.php" line="171" assertions="2" time="0.939886"/>
     </testsuite>
-    <testsuite name="YeteeTest" file="/home/steven/sotd/php/RetailersTest.php" tests="2" assertions="0" failures="0" errors="2" time="2.381210">
-      <testcase name="testYeteeArray" class="YeteeTest" file="/home/steven/sotd/php/RetailersTest.php" line="188" assertions="0" time="1.257216">
+    <testsuite name="YeteeTest" file="/home/steven/sotd/php/RetailersTest.php" tests="2" assertions="0" failures="0" errors="2" time="1.807999">
+      <testcase name="testYeteeArray" class="YeteeTest" file="/home/steven/sotd/php/RetailersTest.php" line="188" assertions="0" time="1.018422">
         <error type="Exception">YeteeTest::testYeteeArray
 Exception: String could not be parsed as XML
 
@@ -35,7 +49,7 @@ Exception: String could not be parsed as XML
 /home/steven/sotd/php/RetailersTest.php:185
 </error>
       </testcase>
-      <testcase name="testYeteeData" class="YeteeTest" file="/home/steven/sotd/php/RetailersTest.php" line="195" assertions="0" time="1.123994">
+      <testcase name="testYeteeData" class="YeteeTest" file="/home/steven/sotd/php/RetailersTest.php" line="195" assertions="0" time="0.789577">
         <error type="Exception">YeteeTest::testYeteeData
 Exception: String could not be parsed as XML
 

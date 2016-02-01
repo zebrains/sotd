@@ -1,0 +1,322 @@
+var express = require('express');
+var fs = require('fs');
+var request = require('request');
+var cheerio = require('cheerio');
+var app     = express();
+
+
+
+//Complete
+app.get('/BustedTees', function(req, res){
+
+      url = 'https://www.bustedtees.com/deals';
+      var shirts = [];
+      var shirt = {};
+
+      request(url, function(error, response, html){
+
+        if(!error){
+          var $ = cheerio.load(html, {
+            xmlMode: true
+          });
+
+          //#deal_4458 > a > img
+          $('div.row div#deals-container').each(function(i, element) {
+            console.log("#"+i);
+            shirt.title = $(this).find('ul#deals li.deal div.product-overlay div.overlay-content span.product_name').text();
+
+            shirt.content = $(this).find('ul#deals li.deal a img').attr('src');
+            shirt.link = $(this).find('ul#deals li.deal a').attr('href');
+
+            shirts.push(shirt);
+            shirt = {};
+          });
+        }
+        res.send(JSON.stringify(shirts, null, 2));
+      })
+});
+
+//Complete
+app.get('/OtherTees', function(req, res){
+
+    url = 'https://www.OtherTees.com';
+    var shirts = [];
+    var shirt = {};
+
+    request(url, function(error, response, html){
+
+      if(!error){
+        var $ = cheerio.load(html, {
+          xmlMode: true
+        });
+
+        //#homepage > ul > li:nth-child(2) > div > div > div > div.product-wrapper > ul.product-slider.todays
+        $('ul.mega-slider li div.container').each(function(i, element) {
+
+          //#homepage > ul > li:nth-child(2) > div > div > div > h1
+          shirt.title = $(this).find('div.col-md-6.main-slide h1').text();
+          shirt.title = shirt.title.trim();
+
+          var background = $(this).find('li div.ot-design ul.model-slider li').attr('style');
+          shirt.background = background.substring(background.indexOf('#'));
+
+          //li div.ot-design ul.model-slider li img
+          shirt.content = url + $(this).find('li div.ot-design ul.model-slider li img').attr('src');
+          shirt.link = "https://www.othertees.com/";
+
+          shirts.push(shirt);
+          shirt = {};
+        });
+      }
+      res.send(JSON.stringify(shirts, null, 2));
+    })
+});
+
+//Complete
+app.get('/Qwertee', function(req, res){
+
+  url = 'https://www.qwertee.com';
+  var shirts = [];
+  var shirt = {};
+
+  request(url, function(error, response, html){
+
+    if(!error){
+      var $ = cheerio.load(html, {
+        xmlMode: true
+      });
+
+      $('div.big-slide.tee.tee-current').each(function(i, element) {
+
+        shirt.title = $(this).find('div.index-tee div.title div span').text();
+        //#just-fluffy > div > div.buy-wrap > div > div > div > div
+        var background = $(this).find('div.index-tee div.buy-wrap div div div div').attr('style');
+        shirt.background = background.substring(background.indexOf('#'));
+        //#just-fluffy > div > div.buy-wrap > div > div > div > img.dynamic-image-design
+        shirt.content = 'http:' + $(this).find('div.index-tee div.buy-wrap div div div img.dynamic-image-design').attr('src');
+        shirt.link = "https://www.qwertee.com/";
+
+        shirts.push(shirt);
+        shirt = {};
+      });
+    }
+    res.send(JSON.stringify(shirts, null, 2));
+  })
+});
+
+//Complete
+app.get('/Ript', function(req, res){
+
+  url = 'https://www.riptapparel.com';
+  var shirts = [];
+  var shirt = {};
+
+  request(url, function(error, response, html){
+
+    if(!error){
+      var $ = cheerio.load(html, {
+        xmlMode: true
+      });
+
+      $('div.columns.medium-4.collection').each(function(i, element) {
+        shirt.title = $(this).children().find('.design-info div div p a').text();
+        shirt.content = "https:" + $(this).parent().children().find('div.images ul.slides li img.initial-art').attr('src');
+        shirt.link = url + $(this).children().find('.design-info div div p a').attr('href');
+
+        shirts.push(shirt);
+        shirt = {};
+      });
+    }
+    res.send(JSON.stringify(shirts, null, 2));
+  })
+})
+
+//Complete
+app.get('/ShirtPunch', function(req, res){
+
+  url = 'http://www.shirtpunch.com/';
+  var shirts = [];
+  var shirt = {};
+
+  request(url, function(error, response, html){
+
+    if(!error){
+      var $ = cheerio.load(html, {
+        xmlMode: true
+      });
+
+      $('div.product.drop-shadow').each(function(i, element) {
+
+        shirt.title = $(this).find('a img').attr('alt');
+        shirt.content = $(this).find('a img').attr('src');
+        shirt.link = $(this).find('a').attr('href');
+
+        shirts.push(shirt);
+        shirt = {};
+      });
+    }
+    res.send(JSON.stringify(shirts, null, 2));
+  })
+});
+
+//Complete
+app.get('/Teefury', function(req, res){
+
+  url = 'http://www.teefury.com/rss/rss.xml';
+  var shirts = [];
+  var shirt = {};
+
+  request(url, function(error, response, html){
+
+    if(!error){
+      var $ = cheerio.load(html, {
+        xmlMode: true
+      });
+
+      $('feed entry').each(function(i, element) {
+
+        shirt.title = $(this).find('title').text();
+
+        var content = $(this).find('content').text();
+        content = content.substring(content.indexOf("http://"));
+        shirt.content = content.substring(0, content.indexOf('"'));
+        shirt.link = "https://teefury.com";
+
+        shirts.push(shirt);
+        shirt = {};
+      });
+    }
+    res.send(JSON.stringify(shirts, null, 2));
+  })
+});
+
+//Complete
+app.get('/Unamee', function(req, res){
+
+  url = 'https://www.unamee.com/';
+  var shirts = [];
+  var shirt = {};
+
+  getLinksAndContent(getTitle);
+
+  function getLinksAndContent(callback){
+    request(url, function(error, response, html){
+      if(!error){
+        var $ = cheerio.load(html, {
+          xmlMode: true
+        });
+        // Finally, we'll define the variables we're going to capture
+        $('div.List_box_small').each(function(i, element) {
+          console.log("Links #"+i);
+          shirt.content = $(this).children().find('div a img').attr('src');
+          shirt.link = $(this).children().find('div.datetab div a').attr('href');
+          shirts.push(shirt);
+          shirt = {};
+          //res.send(JSON.stringify(shirts, null, 2));
+          //console.log(shirts);
+          callback(shirts.length - 1, renderJson);
+        });
+      }
+    });
+  }
+
+  function getTitle(index, callback){
+    request(shirts[index].link, function(error, response, html){
+      if(!error){
+        var $ = cheerio.load(html, {
+          xmlMode: true
+        });
+        console.log("Title #"+index);
+        shirts[index].title = $('div.t-shirt-design-name').text();
+      } else {
+        console.log("There was an error requesting a title.");
+      }
+      callback();
+    });
+
+  }
+
+  function renderJson(){
+    var total = 0;
+    for(var i=0; i < shirts.length; i++){
+      if (shirts[i].title != null){
+        total++;
+      }
+      if (total == shirts.length){
+        res.send(JSON.stringify(shirts, null, 2));
+        //console.log(shirts);
+      }
+    }
+
+    //res.send(JSON.stringify(shirts, null, 2));
+  }
+
+})
+
+//Complete
+app.get('/Woot', function(req, res){
+
+  url = 'https://shirt.woot.com/';
+  var shirts = [];
+  var shirt = {};
+
+  request(url, function(error, response, html){
+
+    if(!error){
+      var $ = cheerio.load(html, {
+        xmlMode: true
+      });
+
+
+        shirt.title = $('div#content section div.photo-section a img.photo').attr('alt');
+        shirt.content = $('div#content section div.photo-section a img.photo').attr('src');
+        shirt.link = url +  $('div#content section div.photo-section a').attr('href');
+
+        shirts.push(shirt);
+        shirt = {};
+    }
+    res.send(JSON.stringify(shirts, null, 2));
+  })
+});
+
+//Incomplete
+app.get('/Yetee', function(req, res){
+
+  url = 'https://theyetee.com/';
+  var shirts = [];
+  var shirt = {};
+
+  request(url, function(error, response, html){
+
+    if(!error){
+      var $ = cheerio.load(html, {
+        xmlMode: true
+      });
+
+        //YETEE needs work
+        shirt.title = $('div.container div.featured-tee div.cycle-slideshow div.slide.cycle.cycle-sentinal a.js-trigger-modal').attr('alt');
+        shirt.content = $('div#content section div.photo-section a img.photo').attr('src');
+        shirt.link = url +  $('div#content section div.photo-section a').attr('href');
+
+        shirts.push(shirt);
+        shirt = {};
+    }
+    res.send(JSON.stringify(shirts, null, 2));
+  })
+});
+
+
+
+
+app.listen('8081');
+
+console.log('http://localhost:8081/BustedTees');
+console.log('http://localhost:8081/OtherTees');
+console.log('http://localhost:8081/Qwertee');
+console.log('http://localhost:8081/Ript');
+console.log('http://localhost:8081/ShirtPunch');
+console.log('http://localhost:8081/Teefury');
+console.log('http://localhost:8081/Unamee');
+console.log('http://localhost:8081/Woot');
+
+exports = module.exports = app;
