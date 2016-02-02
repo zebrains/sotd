@@ -48,11 +48,14 @@ function updateRetailer(name){
   request("http://localhost:8081/"+ name, function (error, response, body) {
     if (!error && response.statusCode == 200) {
       shirts = JSON.parse(body);
+      //console.log(JSON.stringify(shirts));
 
       for (var j=0; j<shirts.length; j++){
-        var query = 'MATCH (r:retailer {name:"'+ name +'"})'+
-                    'CREATE (s:shirt {title: "'+ shirts[j].title +'", background: "'+ shirts[j].background +'", content: "'+ shirts[j].content +'", link: "'+ shirts[j].link +'", lastUpdated: timestamp()}) - [:soldBy] -> (r)';
-
+        var query = 'MATCH (r:retailer {name:"'+ name +'"}) '+
+                    'MERGE (s:shirt {name: "'+ shirts[j].name +'"}) '+
+                    'ON CREATE SET s.background = "'+ shirts[j].background +'", s.content = "'+ shirts[j].content +'", s.link = "'+ shirts[j].link +'", s.lastUpdated = timestamp() '+
+                    'ON MATCH SET s.lastUpdated = timestamp() '+
+                    'MERGE (s) - [:soldBy] -> (r)';
         console.log(query);
 
         runCypherQuery(query, {},

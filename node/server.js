@@ -55,8 +55,8 @@ app.get('/OtherTees', function(req, res){
         $('ul.mega-slider li div.container').each(function(i, element) {
 
           //#homepage > ul > li:nth-child(2) > div > div > div > h1
-          shirt.title = $(this).find('div.col-md-6.main-slide h1').text();
-          shirt.title = shirt.title.trim();
+          shirt.name = $(this).find('div.col-md-6.main-slide h1').text();
+          shirt.name = shirt.name.trim();
 
           var background = $(this).find('li div.ot-design ul.model-slider li').attr('style');
           shirt.background = background.substring(background.indexOf('#'));
@@ -89,7 +89,7 @@ app.get('/Qwertee', function(req, res){
 
       $('div.big-slide.tee.tee-current').each(function(i, element) {
 
-        shirt.title = $(this).find('div.index-tee div.title div span').text();
+        shirt.name = $(this).find('div.index-tee div.title div span').text();
         //#just-fluffy > div > div.buy-wrap > div > div > div > div
         var background = $(this).find('div.index-tee div.buy-wrap div div div div').attr('style');
         shirt.background = background.substring(background.indexOf('#'));
@@ -120,7 +120,7 @@ app.get('/Ript', function(req, res){
       });
 
       $('div.columns.medium-4.collection').each(function(i, element) {
-        shirt.title = $(this).children().find('.design-info div div p a').text();
+        shirt.name = $(this).children().find('.design-info div div p a').text();
         shirt.content = "https:" + $(this).parent().children().find('div.images ul.slides li img.initial-art').attr('src');
         shirt.link = url + $(this).children().find('.design-info div div p a').attr('href');
 
@@ -148,7 +148,7 @@ app.get('/ShirtPunch', function(req, res){
 
       $('div.product.drop-shadow').each(function(i, element) {
 
-        shirt.title = $(this).find('a img').attr('alt');
+        shirt.name = $(this).find('a img').attr('alt');
         shirt.content = $(this).find('a img').attr('src');
         shirt.link = $(this).find('a').attr('href');
 
@@ -176,7 +176,7 @@ app.get('/Teefury', function(req, res){
 
       $('feed entry').each(function(i, element) {
 
-        shirt.title = $(this).find('title').text();
+        shirt.name = $(this).find('title').text();
 
         var content = $(this).find('content').text();
         content = content.substring(content.indexOf("http://"));
@@ -228,7 +228,7 @@ app.get('/Unamee', function(req, res){
           xmlMode: true
         });
         console.log("Title #"+index);
-        shirts[index].title = $('div.t-shirt-design-name').text();
+        shirts[index].name = $('div.t-shirt-design-name').text();
       } else {
         console.log("There was an error requesting a title.");
       }
@@ -240,7 +240,7 @@ app.get('/Unamee', function(req, res){
   function renderJson(){
     var total = 0;
     for(var i=0; i < shirts.length; i++){
-      if (shirts[i].title != null){
+      if (shirts[i].name != null){
         total++;
       }
       if (total == shirts.length){
@@ -269,7 +269,7 @@ app.get('/Woot', function(req, res){
       });
 
 
-        shirt.title = $('div#content section div.photo-section a img.photo').attr('alt');
+        shirt.name = $('div#content section div.photo-section a img.photo').attr('alt');
         shirt.content = $('div#content section div.photo-section a img.photo').attr('src');
         shirt.link = url +  $('div#content section div.photo-section a').attr('href');
 
@@ -295,7 +295,7 @@ app.get('/Yetee', function(req, res){
       });
 
         //body > div.frame > div.row.expand > div.hero-home > div.todays-tees.tees-2.artists-1 >
-        shirt.title = $('div.featured-artists-wrapper div div div.artist-info div.title').text().trim();
+        shirt.name = $('div.featured-artists-wrapper div div div.artist-info div.title').text().trim();
 
         var content = $('div.cycle-slideshow div:nth-child(2) a div').attr('style');
         content = content.substring(content.indexOf("/"));
