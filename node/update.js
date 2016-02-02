@@ -19,8 +19,6 @@ function runCypherQuery(query, params, callback) {
     })
 }
 
-getRetailers(updateRetailers);
-
 function getRetailers(callback){
   runCypherQuery("MATCH (r:retailer) RETURN r",{},
     function (err, resp) {
@@ -33,39 +31,44 @@ function getRetailers(callback){
   );
 }
 
-
-function updateRetailers(retailers){
+function updateRetailersLoop(retailers){
   //console.log(JSON.stringify(retailers));
   //console.log(JSON.stringify(retailers['results'][0]['data'], null, 4));
+
   for (var i=0; i<retailers['results'][0]['data'].length; i++){
 
-    var data = retailers['results'][0]['data'][i]['row'][0];
-    console.log(data);
+    var name = retailers['results'][0]['data'][i]['row'][0]['name'];
+    //console.log(name);
 
-    request("http://localhost:8081/"+ data['name'], function (error, response, body) {
-      if (!error && response.statusCode == 200) {
-        shirts = JSON.parse(body);
-
-        for (var j = 0; j<shirts.length; j++){
-          var query = "MATCH (r:retailer {name:'"+ data['name'] +"'})"+
-                      "CREATE (s:shirt {title: '"+ shirts[j].title +"', background: '"+ shirts[j].background +"', content: '"+ shirts[j].content +"', link: '"+ shirts[j].link +"'}) - [:soldBy] -> (r)";
-
-          console.log(query);
-
-          runCypherQuery(query, {},
-            function (err, resp) {
-              if (err) {
-                console.log(err);
-              } else {
-                console.log(resp);
-              }
-            }
-          );
-        }
-      }
-    });
+    updateRetailer(name);
   }
 }
 
-/*
-*/
+function updateRetailer(name){
+  request("http://localhost:8081/"+ name, function (error, response, body) {
+    if (!error && response.statusCode == 200) {
+      shirts = JSON.parse(body);
+
+      for (var j=0; j<shirts.length; j++){
+        var query = 'MATCH (r:retailer {name:"'+ name +'"})'+
+                    'CREATE (s:shirt {title: "'+ shirts[j].title +'", background: "'+ shirts[j].background +'", content: "'+ shirts[j].content +'", link: "'+ shirts[j].link +'", lastUpdated: timestamp()}) - [:soldBy] -> (r)';
+
+        console.log(query);
+
+        runCypherQuery(query, {},
+          function (err, resp) {
+            if (err) {
+              console.log(err);
+            } else {
+              //console.log(resp);
+            }
+          }
+        );
+      }
+    } else {
+      console.log("There was an error trying to reach http://localhost:8081/"+name);
+    }
+  });
+}
+
+getRetailers(updateRetailersLoop);

@@ -280,7 +280,6 @@ app.get('/Woot', function(req, res){
   })
 });
 
-/*
 //Complete
 app.get('/Yetee', function(req, res){
 
@@ -309,7 +308,7 @@ app.get('/Yetee', function(req, res){
     res.send(JSON.stringify(shirts, null, 2));
   })
 });
-*/
+
 
 
 
@@ -323,6 +322,6 @@ console.log('http://localhost:8081/ShirtPunch');
 console.log('http://localhost:8081/Teefury');
 console.log('http://localhost:8081/Unamee');
 console.log('http://localhost:8081/Woot');
-//console.log('http://localhost:8081/Yetee')
+console.log('http://localhost:8081/Yetee')
 
 exports = module.exports = app;

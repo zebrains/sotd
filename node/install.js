@@ -20,7 +20,7 @@ function runCypherQuery(query, params, callback) {
 }
 
 retailers = [
-'CREATE (:retailer {name:"BustedTees", url:"http://www.bustedtees.com/deals"})',
+//'CREATE (:retailer {name:"BustedTees", url:"http://www.bustedtees.com/deals"})',
 'CREATE (:retailer {name:"OtherTees", url:"https://www.othertees.com/"})',
 'CREATE (:retailer {name:"Qwertee", url:"https://www.qwertee.com/"})',
 'CREATE (:retailer {name:"Ript", url:"https://www.riptapparel.com/"})',
