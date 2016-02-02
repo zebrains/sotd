@@ -38,23 +38,21 @@ lizopedia.directive("shirtBody", function(){
 //Controller
 lizopedia.controller("ShirtController", function($scope, $http){
 
-    $scope.shirt = {};
-    $scope.shirts = [];
+  $scope.shirt = {};
+  $scope.shirts = [];
 
-    $http.get("./php/getShirts.php")
-      .success(function(response) {
-        $scope.shirts = response;
-        //console.log(response);
-      })
-      .error(function(response) {
-        $scope.shirts = [
-          {
-            "title": "Non Existant",
-            "image": "images/missing.jpg"
-          }
-        ]
-      }
-      );
-
-
-});
+  $http.get("./getShirts")
+    .success(function(response) {
+      $scope.shirts = response;
+      //console.log(response);
+    })
+    .error(function(response) {
+      $scope.shirts = [
+        {
+          "title": "Non Existant",
+          "image": "images/missing.jpg"
+        }
+      ]
+    });
+  }
+);

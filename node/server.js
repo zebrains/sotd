@@ -4,7 +4,13 @@ var request = require('request');
 var cheerio = require('cheerio');
 var app     = express();
 
+var host = 'localhost', port = 7474;
+var httpUrlForTransaction = 'http://' + host + ':' + port + '/db/data/transaction/commit';
+var username = "neo4j";
+var password = "steven304114";
+var auth = "Basic " + new Buffer(username + ":" + password).toString("base64");
 
+app.use(express.static('html'));
 
 //Incomplete
 /*
@@ -37,6 +43,59 @@ app.get('/BustedTees', function(req, res){
       })
 });
 */
+function runCypherQuery(query, params, callback) {
+  request.post({
+      uri: httpUrlForTransaction,
+      headers : {
+            "Authorization" : auth
+      },
+      json: {statements: [{statement: query, parameters: params}]}
+    },
+    function (err, res, body) {
+      callback(err, body);
+    })
+}
+
+function convertToShirts(rawShirts, res){
+  var shirts = [];
+  var shirt = {};
+
+  for (var i=0; i<rawShirts['results'][0]['data'].length; i++){
+    var data = rawShirts['results'][0]['data'][i]['row']
+    console.log(JSON.stringify(data));
+
+    shirt.site = data[0];
+    shirt.title = data[1]['name'];
+    shirt.background = data[1]['background'];
+    shirt.content = data[1]['content'];
+    shirt.link = data[1]['link'];
+    shirt.cost = "$0";
+    shirt.shipping = "$0";
+
+    shirts.push(shirt);
+    shirt = {};
+  }
+
+  res.send(JSON.stringify(shirts, null, 2));
+}
+
+
+app.get('/getShirts', function(req, res){
+  query = "MATCH (shirt:shirt)-[:soldBy]->(retailer) return retailer.name,shirt"
+
+  runCypherQuery(query,{},
+    function (err, resp) {
+      if (err) {
+        console.log(err);
+      } else {
+        //res.send(JSON.stringify(resp, null, 2));
+        convertToShirts(resp, res);
+      }
+    }
+  );
+});
+
+
 //Complete
 app.get('/OtherTees', function(req, res){
 
@@ -64,6 +123,7 @@ app.get('/OtherTees', function(req, res){
           //li div.ot-design ul.model-slider li img
           shirt.content = url + $(this).find('li div.ot-design ul.model-slider li img').attr('src');
           shirt.link = "https://www.othertees.com/";
+
 
           shirts.push(shirt);
           shirt = {};

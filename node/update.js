@@ -52,10 +52,10 @@ function updateRetailer(name){
 
       for (var j=0; j<shirts.length; j++){
         var query = 'MATCH (r:retailer {name:"'+ name +'"}) '+
-                    'MERGE (s:shirt {name: "'+ shirts[j].name +'"}) '+
+                    'MERGE (s:shirt {name: "'+ shirts[j].name +'"}) - [:soldBy] -> (r) '+
                     'ON CREATE SET s.background = "'+ shirts[j].background +'", s.content = "'+ shirts[j].content +'", s.link = "'+ shirts[j].link +'", s.lastUpdated = timestamp() '+
-                    'ON MATCH SET s.lastUpdated = timestamp() '+
-                    'MERGE (s) - [:soldBy] -> (r)';
+                    'ON MATCH SET s.lastUpdated = timestamp() ';
+                    //'MERGE (s) - [:soldBy] -> (r)';
         console.log(query);
 
         runCypherQuery(query, {},
