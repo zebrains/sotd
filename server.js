@@ -81,7 +81,12 @@ function convertToShirts(rawShirts, res){
 
 
 app.get('/getShirts', function(req, res){
-  query = "MATCH (shirt:shirt)-[:soldBy]->(retailer) return retailer.name, shirt, retailer.defaultPrice, retailer.defaultShipping"
+  query = "MATCH (shirt:shirt)-[:soldBy]->(retailer) "+
+          "WHERE shirt.lastUpdated >= (timestamp() - 30000) "+
+          "RETURN retailer.name, shirt, retailer.defaultPrice, retailer.defaultShipping "+
+          "ORDER BY ID(shirt) DESC";
+
+  console.log(query);
 
   runCypherQuery(query,{},
     function (err, resp) {
