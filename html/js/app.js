@@ -38,7 +38,7 @@ lizopedia.directive("zoomFrame", function(){
   return {
     restrict: "E",
     replace: true,
-    templateURL: "zoom-frame.html"
+    templateUrl: "zoom-frame.html"
   };
 });
 
