@@ -34,12 +34,29 @@ lizopedia.directive("shirtBody", function(){
   };
 });
 
+lizopedia.directive("zoomFrame", function(){
+  return {
+    restrict: "E",
+    replace: true,
+    templateURL: "zoom-frame.html"
+  };
+});
+
 
 //Controller
 lizopedia.controller("ShirtController", function($scope, $http){
 
   $scope.shirt = {};
   $scope.shirts = [];
+  $scope.selectedShirtIndex = 0;
+
+  $scope.zoomModal = function(index){
+    $scope.selectedShirtIndex = index;
+    console.log("Open Modal Triggered for index "+index);
+    $("#imageModal").modal();
+  }
+
+
 
   $http.get("./getShirts")
     .success(function(response) {
@@ -54,5 +71,4 @@ lizopedia.controller("ShirtController", function($scope, $http){
         }
       ]
     });
-  }
-);
+});

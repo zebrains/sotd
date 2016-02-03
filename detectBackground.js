@@ -24,8 +24,8 @@ function runCypherQuery(query, params, callback) {
 
 function getShirts(callback){
   var query = 'MATCH (shirt:shirt)-[:soldBy]->(retailer)'+
-          'WHERE (shirt.background ="null" OR shirt.background ="undefined") AND shirt.content =~ ".*jpg.*"'+
-          'return retailer.name, shirt';
+              'WHERE (shirt.background ="null" OR shirt.background ="undefined") AND (shirt.content =~ ".*jpg.*" OR shirt.content =~ ".*jpeg.*") '+
+              'RETURN retailer.name, shirt';
 
   runCypherQuery(query,{},
     function (err, resp) {
@@ -39,6 +39,8 @@ function getShirts(callback){
 }
 
 function updateShirtLoop(resp){
+  console.log(JSON.stringify(resp, null, 2));
+
   for (var i=0; i<resp['results'][0]['data'].length; i++){
     var retailer = resp['results'][0]['data'][i]['row'][0];
     var name = resp['results'][0]['data'][i]['row'][1]['name'];

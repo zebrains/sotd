@@ -1,4 +1,4 @@
-<div class="shirtframe" ng-controller="ShirtController as shirtCtrl">
+<div class="shirtframe">
     <h2 ng-show="shirts === undefined || shirts.length == 0">No current articles. </h2>
 
     <!-- Repeated Articles -->
@@ -7,6 +7,11 @@
         <!-- Article -->
         <!-- <shirt-body></shirt-body>  -->
         <!-- Article Edit Form <article-edit></article-edit> -->
+        <a href="" ng-click="zoomModal(shirts.indexOf(shirt));">
+          <div class="shirtzoom">
+            <span class="glyphicon glyphicon-zoom-in" aria-hidden="true"></span> Zoom
+          </div>
+        </a>
         <a href="{{shirt.link}}">
           <div class="shirtimage" style="background-image: url('{{shirt.content}}'); background-color: {{shirt.background}}"></div>
           <div class="shirtdetails">
