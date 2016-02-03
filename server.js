@@ -1,4 +1,4 @@
-ath = require('./auth/auth.js');
+var ath = require('./auth/auth.js');
 
 var express = require('express');
 var fs = require('fs');

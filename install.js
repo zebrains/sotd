@@ -1,7 +1,7 @@
-ath = require('./auth/auth.js');
+var ath = require('./auth/auth.js');
 
-var auth = "Basic " + new Buffer(ath.username + ":" + ath.password).toString("base64");
 var request = require('request');
+var auth = "Basic " + new Buffer(ath.username + ":" + ath.password).toString("base64");
 
 var host = 'localhost', port = 7474;
 var httpUrlForTransaction = 'http://' + host + ':' + port + '/db/data/transaction/commit';
