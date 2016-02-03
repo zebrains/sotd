@@ -7,7 +7,7 @@ var app     = express();
 var host = 'localhost', port = 7474;
 var httpUrlForTransaction = 'http://' + host + ':' + port + '/db/data/transaction/commit';
 var username = "neo4j";
-var password = "steven304114";
+var password = "sssss";
 var auth = "Basic " + new Buffer(username + ":" + password).toString("base64");
 
 app.use(express.static('html'));
