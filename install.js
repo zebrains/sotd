@@ -21,14 +21,15 @@ function runCypherQuery(query, params, callback) {
 
 retailers = [
 //'CREATE (:retailer {name:"BustedTees", url:"http://www.bustedtees.com/deals"})',
-'CREATE (:retailer {name:"OtherTees", url:"https://www.othertees.com/"})',
-'CREATE (:retailer {name:"Qwertee", url:"https://www.qwertee.com/"})',
-'CREATE (:retailer {name:"Ript", url:"https://www.riptapparel.com/"})',
-'CREATE (:retailer {name:"ShirtPunch", url:"https://www.shirtpunch.com"})',
-'CREATE (:retailer {name:"Teefury", url:"https://www.teefury.com/"})',
-'CREATE (:retailer {name:"Unamee", url:"https://www.unamee.com/"})',
-'CREATE (:retailer {name:"Woot", url:"https://shirt.woot.com/"})',
-'CREATE (:retailer {name:"Yetee", url:"https://www.theyetee.com/"})'
+'CREATE (:retailer {name:"OtherTees", url:"https://www.othertees.com/", defaultPrice: "$11", defaultShipping: "$6"})',
+'CREATE (:retailer {name:"Qwertee", url:"https://www.qwertee.com/", defaultPrice: "$12", defaultShipping: "$3"})',
+'CREATE (:retailer {name:"QwerteeShop", url:"http://www.qwertee.com/", defaultPrice: "$15", defaultShipping: "$3"})',
+'CREATE (:retailer {name:"Ript", url:"https://www.riptapparel.com/", defaultPrice: "$11", defaultShipping: "$5"})',
+'CREATE (:retailer {name:"ShirtPunch", url:"https://www.shirtpunch.com", defaultPrice: "$10", defaultShipping: "$4"})',
+'CREATE (:retailer {name:"Teefury", url:"https://www.teefury.com/", defaultPrice: "$11", defaultShipping: "$3"})',
+'CREATE (:retailer {name:"Unamee", url:"https://www.unamee.com/", defaultPrice: "$11", defaultShipping: "$4"})',
+'CREATE (:retailer {name:"Woot", url:"https://shirt.woot.com/", defaultPrice: "$7", defaultShipping: "$5"})',
+'CREATE (:retailer {name:"Yetee", url:"https://www.theyetee.com/", defaultPrice: "$11", defaultShipping: "$4"})'
 ]
 
 for(var i=0; i<retailers.length; i++){

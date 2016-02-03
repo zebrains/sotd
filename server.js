@@ -69,8 +69,8 @@ function convertToShirts(rawShirts, res){
     shirt.background = data[1]['background'];
     shirt.content = data[1]['content'];
     shirt.link = data[1]['link'];
-    shirt.cost = "$0";
-    shirt.shipping = "$0";
+    shirt.cost = data[2];
+    shirt.shipping = data[3];
 
     shirts.push(shirt);
     shirt = {};
@@ -81,7 +81,7 @@ function convertToShirts(rawShirts, res){
 
 
 app.get('/getShirts', function(req, res){
-  query = "MATCH (shirt:shirt)-[:soldBy]->(retailer) return retailer.name,shirt"
+  query = "MATCH (shirt:shirt)-[:soldBy]->(retailer) return retailer.name, shirt, retailer.defaultPrice, retailer.defaultShipping"
 
   runCypherQuery(query,{},
     function (err, resp) {
@@ -129,6 +129,8 @@ app.get('/OtherTees', function(req, res){
         shirt.content = url + $(this).find('li div.ot-design ul.model-slider li img').attr('src');
         shirt.link = "https://www.othertees.com/";
 
+        shirt.price =
+        shirt.shipping =
 
         shirts.push(shirt);
         shirt = {};
@@ -173,6 +175,37 @@ app.get('/Qwertee', function(req, res){
     res.send(JSON.stringify(shirts, null, 2));
   })
 });
+
+//Incomplete
+app.get('/QwerteeShop',function(req, res){
+
+    var url = 'https://www.qwertee.com';
+    var shirts = [];
+    var shirt = {};
+
+    request(url, function(error, response, html){
+
+      if(!error){
+        var $ = cheerio.load(html, {
+          xmlMode: true
+        });
+
+        $('div.index-tee-list-wrap ul.index-tee-list li').each(function(i, element) {
+
+          shirt.name = $(this).find('div.hover-info a b').text();
+          if (shirt.name !== ''){
+            shirt.background = null;
+            shirt.content = "http:" + $(this).find('div.inner a img').attr('src');
+            shirt.link = url + $(this).find('div.inner a').attr('href');
+
+            shirts.push(shirt);
+          }
+          shirt = {};
+        });
+      }
+      res.send(JSON.stringify(shirts, null, 2));
+    })
+})
 
 //Complete
 app.get('/Ript', function(req, res){
@@ -397,6 +430,7 @@ app.listen('8081');
 //console.log('http://localhost:8081/BustedTees');
 console.log('http://localhost:8081/OtherTees');
 console.log('http://localhost:8081/Qwertee');
+console.log('http://localhost:8081/QwerteeShop')
 console.log('http://localhost:8081/Ript');
 console.log('http://localhost:8081/ShirtPunch');
 console.log('http://localhost:8081/Teefury');
