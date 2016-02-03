@@ -1,12 +1,13 @@
+ath = require('./auth/auth.js');
+
 var fs = require('fs');
 var jpeg = require('jpeg-js');
 var request = require('request').defaults({encoding: null});
 
 var host = 'localhost', port = 7474;
 var httpUrlForTransaction = 'http://' + host + ':' + port + '/db/data/transaction/commit';
-var username = "neo4j";
-var password = "steven304114";
-var auth = "Basic " + new Buffer(username + ":" + password).toString("base64");
+
+var auth = "Basic " + new Buffer(ath.username + ":" + ath.password).toString("base64");
 
 function runCypherQuery(query, params, callback) {
   request.post({

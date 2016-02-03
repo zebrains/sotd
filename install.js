@@ -1,6 +1,6 @@
-var username = "neo4j";
-var password = "steven304114";
-var auth = "Basic " + new Buffer(username + ":" + password).toString("base64");
+ath = require('./auth/auth.js');
+
+var auth = "Basic " + new Buffer(ath.username + ":" + ath.password).toString("base64");
 var request = require('request');
 
 var host = 'localhost', port = 7474;
