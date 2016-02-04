@@ -49,6 +49,7 @@ lizopedia.controller("ShirtController", function($scope, $http){
   $scope.shirt = {};
   $scope.shirts = [];
   $scope.selectedShirtIndex = 0;
+  $scope.sorting = 'latest';
 
   $scope.zoomModal = function(index){
     $scope.selectedShirtIndex = index;
@@ -69,6 +70,7 @@ lizopedia.controller("ShirtController", function($scope, $http){
     function success(response){
       console.log("Success");
       $scope.shirts = response.data;
+      $scope.sorting = "price";
     },
     function error(response){
       $scope.shirts = [
@@ -94,6 +96,7 @@ lizopedia.controller("ShirtController", function($scope, $http){
     function success(response){
       console.log("Success");
       $scope.shirts = response.data;
+      $scope.sorting = "latest";
     },
     function error(response){
       $scope.shirts = [
