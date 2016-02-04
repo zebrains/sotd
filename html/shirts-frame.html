@@ -2,7 +2,9 @@
     <h1 ng-show="shirts === undefined || shirts.length == 0">Loading the latest T-shirts...</h1>
 
     <!-- Repeated Articles -->
+    <h1>Today's Shirt Sales<small> - {{sorting | caps}}</small></h1>
     <div class="flex-container">
+
       <div class="shirt" ng-repeat="shirt in shirts">
         <!-- Article -->
         <!-- <shirt-body></shirt-body>  -->

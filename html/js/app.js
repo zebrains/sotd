@@ -42,6 +42,11 @@ lizopedia.directive("zoomFrame", function(){
   };
 });
 
+lizopedia.filter('caps', function() {
+    return function(input, scope) {
+      return (!!input) ? input.charAt(0).toUpperCase() + input.substr(1).toLowerCase() : '';
+    }
+});
 
 //Controller
 lizopedia.controller("ShirtController", function($scope, $http){
