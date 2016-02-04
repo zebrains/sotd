@@ -86,7 +86,8 @@ app.get('/getShirts', function(req, res){
 });
 
 
-//Complete
+//Complete Query
+//Affiliate account created
 app.get('/OtherTees', function(req, res){
 
   var url = 'https://www.OtherTees.com';
@@ -131,6 +132,7 @@ app.get('/OtherTees', function(req, res){
 });
 
 //Complete
+//Affiliate email sent
 app.get('/Qwertee', function(req, res){
 
   var url = 'https://www.qwertee.com/rss';
@@ -167,6 +169,7 @@ app.get('/Qwertee', function(req, res){
 });
 
 //Incomplete
+//Affiliate email sent
 app.get('/QwerteeShop',function(req, res){
 
     var url = 'https://www.qwertee.com';
@@ -198,6 +201,7 @@ app.get('/QwerteeShop',function(req, res){
 })
 
 //Complete
+//Affiliate email sent
 app.get('/Ript', function(req, res){
 
   var url = 'https://www.riptapparel.com';
@@ -228,6 +232,7 @@ app.get('/Ript', function(req, res){
 })
 
 //Complete
+//Affiliate email sent
 app.get('/ShirtPunch', function(req, res){
 
   var url = 'http://www.shirtpunch.com/';
@@ -256,6 +261,7 @@ app.get('/ShirtPunch', function(req, res){
 });
 
 //Complete
+//Rakuten email sent to clear up suspended account.
 app.get('/Teefury', function(req, res){
 
   var url = 'http://www.teefury.com/rss/rss.xml';
@@ -287,9 +293,12 @@ app.get('/Teefury', function(req, res){
 });
 
 //Complete
+// Ref Link = 'http://www.shareasale.com/r.cfm?u=1144472&b=527906&m=50011&afftrack=&urllink=' + content
 app.get('/Unamee', function(req, res){
 
   var url = 'https://www.unamee.com/';
+  var ref = 'http://www.shareasale.com/r.cfm?u=1144472&b=527906&m=50011&afftrack=&urllink=';
+
   var shirts = [];
   var shirt = {};
 
@@ -313,7 +322,7 @@ app.get('/Unamee', function(req, res){
           }
 
           shirt.content = $(this).children().find('div a img').attr('src');
-          shirt.link = $(this).children().find('div.datetab div a').attr('href');
+          shirt.link = ref + $(this).children().find('div.datetab div a').attr('href');
           shirts.push(shirt);
           shirt = {};
           //res.send(JSON.stringify(shirts, null, 2));
