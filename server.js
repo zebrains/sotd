@@ -13,37 +13,7 @@ var auth = "Basic " + new Buffer(ath.username + ":" + ath.password).toString("ba
 
 app.use(express.static('html'));
 
-//Incomplete
-/*
-app.get('/BustedTees', function(req, res){
 
-      url = 'https://www.bustedtees.com/deals';
-      var shirts = [];
-      var shirt = {};
-
-      request(url, function(error, response, html){
-
-        if(!error){
-          var $ = cheerio.load(html, {
-            xmlMode: true
-          });
-
-          //#bt-content > div > div > div
-          $('div#deals-container').each(function(i, element) {
-            console.log("#"+i);
-            shirt.title = $(this).find('ul#deals li.deal div.product-overlay div.overlay-content span.product_name').text();
-
-            shirt.content = $(this).find('ul#deals li.deal a img').attr('src');
-            shirt.link = $(this).find('ul#deals li.deal a').attr('href');
-
-            shirts.push(shirt);
-            shirt = {};
-          });
-        }
-        res.send(JSON.stringify(shirts, null, 2));
-      })
-});
-*/
 function runCypherQuery(query, params, callback) {
   request.post({
       uri: httpUrlForTransaction,
