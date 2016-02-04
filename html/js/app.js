@@ -56,7 +56,54 @@ lizopedia.controller("ShirtController", function($scope, $http){
     $("#imageModal").modal();
   }
 
+  $scope.sortByPrice = function(){
+    console.log("Sorting by price");
+    $http({
+      method  : "GET",
+      url     : "./getShirts",
+      params  : {
+        sorting: "price"
+      }
+    })
+    .then(
+    function success(response){
+      console.log("Success");
+      $scope.shirts = response.data;
+    },
+    function error(response){
+      $scope.shirts = [
+        {
+          "title": "Non Existant",
+          "image": "images/missing.jpg"
+        }
+      ]
+    });
+  }
 
+  $scope.sortByLatest = function(){
+    console.log("Sorting by latest");
+
+    $http({
+      method  : "GET",
+      url     : "./getShirts",
+      params  : {
+        sorting: "latest"
+      }
+    })
+    .then(
+    function success(response){
+      console.log("Success");
+      $scope.shirts = response.data;
+    },
+    function error(response){
+      $scope.shirts = [
+        {
+          "title": "Non Existant",
+          "image": "images/missing.jpg"
+        }
+      ]
+    });
+  }
 
   $http.get("./getShirts")
     .success(function(response) {
