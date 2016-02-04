@@ -60,7 +60,7 @@ app.get('/getShirts', function(req, res){
     var query = "MATCH (shirt:shirt)-[:soldBy]->(retailer) "+
             "WHERE shirt.lastUpdated >= (timestamp() - 30000) "+
             "RETURN retailer.name, shirt, retailer.defaultPrice, retailer.defaultShipping "+
-            "ORDER BY (retailer.defaultPrice + retailer.defaultShipping) DESC";
+            "ORDER BY (retailer.defaultPrice + retailer.defaultShipping) ASC";
   } else {
     console.log("Defaulting to latest query.");
     var query = "MATCH (shirt:shirt)-[:soldBy]->(retailer) "+
