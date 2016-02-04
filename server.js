@@ -51,11 +51,22 @@ function convertToShirts(rawShirts, res){
 }
 
 
+
 app.get('/getShirts', function(req, res){
-  query = "MATCH (shirt:shirt)-[:soldBy]->(retailer) "+
-          "WHERE shirt.lastUpdated >= (timestamp() - 30000) "+
-          "RETURN retailer.name, shirt, retailer.defaultPrice, retailer.defaultShipping "+
-          "ORDER BY ID(shirt) DESC";
+
+  if (req.query.sorting == "price"){
+    var = query = "MATCH (shirt:shirt)-[:soldBy]->(retailer) "+
+            "WHERE shirt.lastUpdated >= (timestamp() - 30000) "+
+            "RETURN retailer.name, shirt, retailer.defaultPrice, retailer.defaultShipping "+
+            "ORDER BY (retailer.defaultPrice + retailer.defaultShipping) DESC";  
+  } else {
+    var = query = "MATCH (shirt:shirt)-[:soldBy]->(retailer) "+
+            "WHERE shirt.lastUpdated >= (timestamp() - 30000) "+
+            "RETURN retailer.name, shirt, retailer.defaultPrice, retailer.defaultShipping "+
+            "ORDER BY ID(shirt) DESC";
+
+  }
+
 
   console.log(query);
 
