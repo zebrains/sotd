@@ -85,7 +85,7 @@ lizopedia.controller("ShirtController", function($scope, $http){
         }
       ]
     });
-  }
+  };
 
   $scope.sortByLatest = function(){
     console.log("Sorting by latest");
@@ -111,7 +111,7 @@ lizopedia.controller("ShirtController", function($scope, $http){
         }
       ]
     });
-  }
+  };
 
   $http.get("./getShirts")
     .success(function(response) {
@@ -126,4 +126,5 @@ lizopedia.controller("ShirtController", function($scope, $http){
         }
       ]
     });
+
 });
