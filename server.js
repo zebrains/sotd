@@ -201,10 +201,11 @@ app.get('/QwerteeShop',function(req, res){
 })
 
 //Complete
-//Affiliate email sent
+//Affiliate link http://www.shareasale.com/r.cfm?u=1144472&b=559726&m=51318&afftrack=&urllink=www%2Eriptapparel%2Ecom%2F
 app.get('/Ript', function(req, res){
 
   var url = 'https://www.riptapparel.com';
+  var ref = 'http://www.shareasale.com/r.cfm?u=1144472&b=559726&m=51318&afftrack=&urllink='
   var shirts = [];
   var shirt = {};
 
@@ -221,7 +222,7 @@ app.get('/Ript', function(req, res){
         //div.design-images div.images-carousel div div div div img
         shirt.content = "https:" + $(this).find('img.initial-art').attr('src');
 
-        shirt.link = url + $(this).children().find('.design-info div div p a').attr('href');
+        shirt.link = ref + url + $(this).children().find('.design-info div div p a').attr('href');
 
         shirts.push(shirt);
         shirt = {};
