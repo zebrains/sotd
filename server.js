@@ -303,7 +303,35 @@ app.get('/Unamee', function(req, res){
   var shirts = [];
   var shirt = {};
 
-  getLinksAndContent(getTitle);
+
+  request(url, function(error, response, html){
+
+    if(!error){
+      var $ = cheerio.load(html, {
+        xmlMode: true
+      });
+
+      $('div.List_box_small').each(function(i, element) {
+
+        //body > div.maindiv > div.std > div > div:nth-child(2) > div.List_box_small.List_box_small-one > div.list_Name
+        shirt.name = $(this).find('div.list_Name').text();
+        shirt.content = $(this).find('div a img').attr('src');
+        shirt.link = ref + $(this).find('div.datetab div a').attr('href');
+        shirt.background = $(this).find('div.list_img.themed').attr('style');
+        if (typeof shirt.background == 'string'){
+          shirt.background = shirt.background.substring(shirt.background.indexOf('#'));
+        } else {
+          shirt.background = null;
+        }
+
+        shirts.push(shirt);
+        shirt = {};
+      });
+    }
+    res.send(JSON.stringify(shirts, null, 2));
+  });
+
+  //getLinksAndContent(getTitle);
 
   function getLinksAndContent(callback){
     request(url, function(error, response, html){
@@ -314,7 +342,7 @@ app.get('/Unamee', function(req, res){
         // Finally, we'll define the variables we're going to capture
         $('div.List_box_small').each(function(i, element) {
           //console.log("Links #"+i);
-
+          //shirt.name = $(this).find('div.list_Name').text();
           shirt.background = $(this).find('div.list_img.themed').attr('style');
           if (typeof shirt.background == 'string'){
             shirt.background = shirt.background.substring(shirt.background.indexOf('#'));
@@ -341,7 +369,8 @@ app.get('/Unamee', function(req, res){
           xmlMode: true
         });
         //console.log("Title #"+index);
-        shirts[index].name = $('div.t-shirt-design-name').text();
+        //#add_to_cart div.t-shirt-design-name
+        shirts[index].name = $('div form#add_to_cart div.t-shirt-design-name').text();
       } else {
         console.log("There was an error requesting a title.");
       }
