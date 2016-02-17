@@ -54,7 +54,12 @@ function updateShirtLoop(resp){
 function decodeBackgroundColor(url, shirt, retailer, callback){
   request.get(url, function (error, response, body){
     if (!error && response.statusCode == 200) {
-      var rawImageData = jpeg.decode(body);
+      try{
+        var rawImageData = jpeg.decode(body);
+      }
+      catch (err){
+        console.log("");  
+      }
 
       var r = rawImageData['data'][0].toString(16);
       var g = rawImageData['data'][1].toString(16);
