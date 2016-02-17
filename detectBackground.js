@@ -56,18 +56,20 @@ function decodeBackgroundColor(url, shirt, retailer, callback){
     if (!error && response.statusCode == 200) {
       try{
         var rawImageData = jpeg.decode(body);
+
+        var r = rawImageData['data'][0].toString(16);
+        var g = rawImageData['data'][1].toString(16);
+        var b = rawImageData['data'][2].toString(16);
+
+        var background = "#"+r+g+b;
+
+        callback(background, shirt, retailer);
       }
       catch (err){
-        console.log("");  
+        console.log("");
       }
 
-      var r = rawImageData['data'][0].toString(16);
-      var g = rawImageData['data'][1].toString(16);
-      var b = rawImageData['data'][2].toString(16);
 
-      var background = "#"+r+g+b;
-
-      callback(background, shirt, retailer);
 
     } else {
       console.log("Error occurred trying to access the image");
